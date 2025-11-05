@@ -7,7 +7,7 @@ http://www.hpinfotech.com
 
 Project : 
 Version : 
-Date    : 11/4/2025
+Date    : 11/5/2025
 Author  : 
 Company : 
 Comments: 
@@ -23,19 +23,18 @@ Data Stack size         : 256
 
 #include <mega16.h>
 #include <delay.h>
-
 // Alphanumeric LCD functions
 #include <alcd.h>
-int i;
+int i,k,j;
 typedef unsigned char byte;
-flash byte char1[8]={0,0,0,0,0,0,0,0};
-flash byte char2[8]={31,31,0,0,0,0,0,0};
-flash byte char3[8]={31,31,31,0,0,0,0,0};
-flash byte char4[8]={31,31,31,31,0,0,0,0};
-flash byte char5[8]={31,31,31,31,31,0,0,0};
-flash byte char6[8]={31,31,31,31,31,31,0,0};
-flash byte char7[8]={31,31,31,31,31,31,31,0};
-flash byte char8[8]={31,31,31,31,31,31,31,31};
+flash byte char0[8]={0,0,0,0,0,0,0,0};
+flash byte char1[8]={31,31,0,0,0,0,0,0};
+flash byte char2[8]={31,31,31,0,0,0,0,0};
+flash byte char3[8]={31,31,31,31,0,0,0,0};
+flash byte char4[8]={31,31,31,31,31,0,0,0};
+flash byte char5[8]={31,31,31,31,31,31,0,0};
+flash byte char6[8]={31,31,31,31,31,31,31,0};
+flash byte char7[8]={31,31,31,31,31,31,31,31};
 
 void define_char(byte flash *pc,byte char_code)
 {
@@ -167,153 +166,45 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 // D7 - PORTA Bit 7
 // Characters/line: 20
 lcd_init(20);
-define_char(char1,0);
-define_char(char2,1);
-define_char(char3,2);
-define_char(char4,3);
-define_char(char5,4);
-define_char(char6,5);
-define_char(char7,6);
-define_char(char8,7);
+define_char(char0,0);
+define_char(char1,1);
+define_char(char2,2);
+define_char(char3,3);
+define_char(char4,4);
+define_char(char5,5);
+define_char(char6,6);
+define_char(char7,7);
 
 while (1)
-      {  
-      for(i=0;i<=19;i++)
-      {   
-        lcd_gotoxy(i,0);
-        lcd_putchar(1);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(2);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(3);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(4);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(5);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(6);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(7);
-        delay_ms(10);
-                                     
-      }    
-      
-      for(i=0;i<=19;i++)
-      {   
-        lcd_gotoxy(i,1);
-        lcd_putchar(1);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(2);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(3);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(4);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(5);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(6);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(7);
-        delay_ms(10);
-                                     
-      }   
-      
-      //Reverse
-      
-      for(i=19;i>=0;i--)
-      {   
-        lcd_gotoxy(i,1);
-        lcd_putchar(7);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(6);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(5);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(4);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(3);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(2);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(1);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,1);
-        lcd_putchar(0);
-        delay_ms(10);
-                                     
-      }   
-      
-      for(i=19;i>=0;i--)
-      {   
-        lcd_gotoxy(i,0);
-        lcd_putchar(7);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(6);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(5);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(4);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(3);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(2);
-        delay_ms(10);
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(1);
-        delay_ms(10); 
-        
-        lcd_gotoxy(i,0);
-        lcd_putchar(0);
-        delay_ms(10);
-                                     
-      }
-  }
+{
+    for(k=0;k<=1;k++)     
+    {
+        for(j=0;j<=7;j++)  
+        {
+            for(i=0;i<=19;i++)
+            {
+                lcd_gotoxy(i,k);
+                lcd_putchar(j);
+            }
+            delay_ms(40);
+        }
+    }
+
+    
+    for(k=1;k>=0;k--)        
+    {
+        for(j=7;j>=0;j--)    
+        {
+            for(i=0;i<=19;i++)
+            {
+                lcd_gotoxy(i,k);
+                lcd_putchar(j);
+            }
+            delay_ms(40);
+        }
+        if(k==0) break;
+    }
+}
+
+
 }

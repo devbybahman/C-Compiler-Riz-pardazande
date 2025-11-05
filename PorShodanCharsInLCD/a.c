@@ -45,7 +45,6 @@ void define_char(byte flash *pc,byte char_code)
    {
       lcd_write_byte(a++,*pc++);
    }    
-  
 }
 
 // Declare your global variables here
@@ -168,7 +167,7 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 // D7 - PORTA Bit 7
 // Characters/line: 20
 lcd_init(20);
-define_char(char1,0);
+define_char(char1,0);//
 define_char(char2,1);
 define_char(char3,2);
 define_char(char4,3);
@@ -176,9 +175,25 @@ define_char(char5,4);
 define_char(char6,5);
 define_char(char7,6);
 define_char(char8,7);
-
+                  
 while (1)
-      {  
+{  
+
+//               for(k=0;k<=1;k++)
+//                    for(j=0;j<=19;j++)            
+//                          for(i=1;i<=7;i++)
+//                                 {
+//                                 lcd_gotoxy(j,k);
+//                                 lcd_putchar(i);
+//                                 delay_ms(10)
+//                                 }
+
+//reverse
+
+
+
+
+
       for(i=0;i<=19;i++)
       {   
         lcd_gotoxy(i,0);
@@ -241,7 +256,9 @@ while (1)
         lcd_putchar(7);
         delay_ms(10);
                                      
-      }
+      }   
+      
+      //Reverse
       
       for(i=19;i>=0;i--)
       {   
@@ -314,7 +331,5 @@ while (1)
         delay_ms(10);
                                      
       }
-        
-
-      }
+  }
 }
