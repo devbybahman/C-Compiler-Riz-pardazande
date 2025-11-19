@@ -7,7 +7,7 @@ http://www.hpinfotech.com
 
 Project : 
 Version : 
-Date    : 10/22/2025
+Date    : 11/12/2025
 Author  : 
 Company : 
 Comments: 
@@ -22,8 +22,10 @@ Data Stack size         : 256
 *******************************************************/
 
 #include <mega16.h>
-#include <delay.h>
+
+// Alphanumeric LCD functions
 #include <alcd.h>
+int data;
 
 // Declare your global variables here
 
@@ -40,9 +42,9 @@ PORTA=(0<<PORTA7) | (0<<PORTA6) | (0<<PORTA5) | (0<<PORTA4) | (0<<PORTA3) | (0<<
 
 // Port B initialization
 // Function: Bit7=In Bit6=In Bit5=In Bit4=In Bit3=In Bit2=In Bit1=In Bit0=In 
-DDRB=(0<<DDB7) | (0<<DDB6) | (0<<DDB5) | (0<<DDB4) | (0<<DDB3) | (0<<DDB2) | (0<<DDB1) | (0<<DDB0);
-// State: Bit7=T Bit6=T Bit5=T Bit4=T Bit3=T Bit2=T Bit1=T Bit0=T 
-PORTB=(0<<PORTB7) | (0<<PORTB6) | (0<<PORTB5) | (0<<PORTB4) | (0<<PORTB3) | (0<<PORTB2) | (0<<PORTB1) | (0<<PORTB0);
+DDRB=(1<<DDB7) | (1<<DDB6) | (1<<DDB5) | (1<<DDB4) | (1<<DDB3) | (0<<DDB2) | (0<<DDB1) | (0<<DDB0);
+// State: ÈÇ Pull-up ÈÑÇí ÓæÆíåÇ
+PORTB=(0<<PORTB7) | (0<<PORTB6) | (0<<PORTB5) | (0<<PORTB4) | (0<<PORTB3) | (1<<PORTB2) | (1<<PORTB1) | (1<<PORTB0);
 
 // Port C initialization
 // Function: Bit7=In Bit6=In Bit5=In Bit4=In Bit3=In Bit2=In Bit1=In Bit0=In 
@@ -52,7 +54,7 @@ PORTC=(0<<PORTC7) | (0<<PORTC6) | (0<<PORTC5) | (0<<PORTC4) | (0<<PORTC3) | (0<<
 
 // Port D initialization
 // Function: Bit7=In Bit6=In Bit5=In Bit4=In Bit3=In Bit2=In Bit1=In Bit0=In 
-DDRD=(0<<DDD7) | (0<<DDD6) | (0<<DDD5) | (0<<DDD4) | (0<<DDD3) | (0<<DDD2) | (0<<DDD1) | (0<<DDD0);
+DDRD=(0<<DDD7) | (0<<DDD6) | (0<<DDD5) | (0<<DDD4) | (1<<DDD3) | (1<<DDD2) | (1<<DDD1) | (1<<DDD0);
 // State: Bit7=T Bit6=T Bit5=T Bit4=T Bit3=T Bit2=T Bit1=T Bit0=T 
 PORTD=(0<<PORTD7) | (0<<PORTD6) | (0<<PORTD5) | (0<<PORTD4) | (0<<PORTD3) | (0<<PORTD2) | (0<<PORTD1) | (0<<PORTD0);
 
@@ -143,106 +145,26 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 // D5 - PORTA Bit 5
 // D6 - PORTA Bit 6
 // D7 - PORTA Bit 7
-// Characters/line: 8
-lcd_init(8);
-DDRC = 0X0F;
-PORTC = 0XF0;
+// Characters/line: 20
+lcd_init(20);
+
 while (1)
       {
-PORTC.0 =1;
-PORTC.1 =1;
-PORTC.2 =0;
-PORTC.3 =1;
-if(PINC.4 == 0 && PINC.5==1 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("7");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==0 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("8");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 0 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("9");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 1 && PINC.7 ==0){
-lcd_gotoxy(0,0);
-lcd_putsf("/");
-delay_ms(100);
-}
-PORTC.0 =1;
-PORTC.1 =0;
-PORTC.2 =1;
-PORTC.3 =1; 
-if(PINC.4 == 0 && PINC.5==1 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("4");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==0 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("5");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 0 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("6");
-delay_ms(50);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 1 && PINC.7 ==0){
-lcd_gotoxy(0,0);
-lcd_putsf("*");
-delay_ms(100);
-}
-PORTC.0 =0;
-PORTC.1 =1;
-PORTC.2 =1;
-PORTC.3 =1;  
-if(PINC.4 == 0 && PINC.5==1 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("1");
-delay_ms(50);
-}
-if(PINC.4 == 1 && PINC.5==0 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("2");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 0 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("3");
-delay_ms(50);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 1 && PINC.7 ==0){
-lcd_gotoxy(0,0);
-lcd_putsf("-");
-delay_ms(100);
-}
-PORTC.0 =1;
-PORTC.1 =1;
-PORTC.2 =1;
-PORTC.3 =0; 
-if(PINC.4 == 0 && PINC.5==1 && PINC.6== 1 && PINC.7 ==1){
-lcd_clear();
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==0 && PINC.6== 1 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("0");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 0 && PINC.7 ==1){
-lcd_gotoxy(0,0);
-lcd_putsf("#");
-delay_ms(100);
-}
-if(PINC.4 == 1 && PINC.5==1 && PINC.6== 1 && PINC.7 ==0){
-lcd_gotoxy(0,0);
-lcd_putsf("+");
-delay_ms(100);
-}
+   if(PINB.2==0){
+   
+   
+              data=PINB;
+         data= data & 0x03;
+         switch(data){
+          case 0:PORTD=0b00000001;break; 
+          case 1:PORTD=0b00000010;break; 
+          case 2:PORTD=0b00000100;break; 
+          case 3:PORTD=0b00001000;break; 
+   
+   }
+          
+         
+         }
+
       }
 }
