@@ -1,0 +1,52 @@
+STACKSG SEGMENT STACK 'STACK'
+    DW 32H DUP(0)       
+STACKSG ENDS            
+
+DATASG SEGMENT 'DATA'
+  MESSAGE1 DB 'MICROCONTROLLER','$'  
+    
+DATASG ENDS            
+
+CODESG SEGMENT 'CODE'
+    ASSUME SS:STACKSG, DS:DATASG, CS:CODESG
+MAIN PROC FAR
+    MOV AX,DATASG        
+    MOV DS,AX  
+            
+    CALL CLEAR 
+    CALL CURSOR
+    CALL DISPLAY1         
+
+    
+ 
+    MOV AX,4C00H       
+    INT 21H          
+MAIN ENDP 
+
+CLEAR PROC NEAR 
+      MOV AX,0600H  ;SHOMARE SEVICE AX: AL + AH
+      MOV BH,07H   ;BLACK 
+      MOV CX,0000H ; chap bala 
+      MOV DX,184FH ;rast paiin   
+      INT 10H
+      RET
+CLEAR ENDP
+
+CURSOR PROC NEAR
+        MOV AH,02H
+        MOV BH,00  ;START AZ 0
+        MOV DH,12  ; SATR 12  => VASAZ SAFHE
+        MOV DL,30  ; SOTON 30 AZ CHAP
+        INT 10H
+        RET
+CURSOR ENDP
+
+DISPLAY1 PROC NEAR 
+    MOV AH,09H
+    LEA DX,MESSAGE1
+    INT 21H
+    RET
+DISPLAY1 ENDP
+    
+CODESG ENDS           
+    END MAIN           
